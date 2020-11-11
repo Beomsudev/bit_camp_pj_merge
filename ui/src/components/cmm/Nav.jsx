@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   toolbar: {
-    background: '#D5D8DC'
+    // background: '#D5D8DC'
+    background: 'white'
   },
 
   title: {
@@ -32,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   dayoungTitle: {
-    fontsize: '1 rem',
+    fontsize: '1.25 rem',
     textDecoration: 'none',
-    color: 'white',
+    color: 'black',
   },
 
   link: {
@@ -100,18 +101,10 @@ export default function Nav(props) {
        <Toolbar className={classes.toolbar}>
        {props.isAuth !== null
         ? <div>  
-            <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/movie-detail" className={classes.dayoungTitle}>다영이</Link>
-        </Typography>
-        <Typography style={{ paddingLeft: 20 }}>
+          <Button style ={{fontSize: 25}}>
+            <Link to="/" className={classes.dayoungTitle}>다영이</Link>
+            </Button>
+        {/* <Typography style={{ paddingLeft: 20 }}> */}
           <Button>
             <Link to="/userregister" className={classes.link}>회원 가입</Link>
           </Button>
@@ -135,26 +128,20 @@ export default function Nav(props) {
               <AccountCircle/>
             </IconButton>
           </Link>
-        </Typography>
+        {/* </Typography> */}
         </div>:
           <div>
-            <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/" className={classes.link}>다영이</Link>
-        </Typography> 
-          <Button>
+          {/* <Typography className={classes.title} variant="h6" noWrap> */}
+          <Button style ={{fontSize: 25}}>
+            <Link to="/" className={classes.dayoungTitle}>다영이</Link>
+            </Button>
+        {/* </Typography>  */}
+          {/* <Button>
           <Link to="/userregister" className={classes.link}>회원 가입</Link>
         </Button>
         <Button>
           <Link to="/userlogin" className={classes.link}>로그인</Link>
-        </Button>
+        </Button> */}
         </div>
       }  
         </Toolbar>

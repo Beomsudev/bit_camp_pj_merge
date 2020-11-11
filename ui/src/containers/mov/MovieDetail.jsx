@@ -65,7 +65,7 @@ export default function MovieDetail() {
       axios.get(`http://127.0.0.1:8080/api/movies`)
       .then(res=>{
           // alert(`List Success`)
-          setData(res.data.slice(0, 101))
+          setData(res.data.slice(0, 102))
       })
       .catch(e=>{
           alert(`List Failure`)

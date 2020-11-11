@@ -75,7 +75,7 @@ export default function UserLogin() {
 
             sessionStorage.setItem("sessionUser", res.data['usr_id'])
             
-            history.push("/")  // 여기 치는 부분으로 이동
+            history.push("/movie-detail")  // 여기 치는 부분으로 이동
             window.location.reload()
 
         })
