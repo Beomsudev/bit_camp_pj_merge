@@ -2,11 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from pandas import DataFrame
-
 from com_dayoung_api.ext.db import db, openSession
+from com_dayoung_api.cop.act.model.actor_kdd import ActoKdd
 
 class ActorDfo:
-    def actors_to_df(self, actors_name, actor_id):
+    def actors_to_df(self):
+        actor_kdd = ActoKdd()
+        actors_name = actor_kdd.crawl()
+        act_id = 1
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"}
         actors = []
         # 화면에 보여주고 싶은 배우들
@@ -67,7 +70,7 @@ class ActorDfo:
             age = p.search(actor['출생']).group(0)
             age = age[:-1]
             actor_info['age'] = age
-            actor_info['actor_id'] = actor_id
+            actor_info['act_id'] = act_id
             # 가명 없을 시 없다고 표시 본명에 가명 없음 이라고 표시
             actor_info['name'] = name
             if '본명' not in actor.keys():
@@ -115,15 +118,15 @@ class ActorDfo:
             actor_info['debut_year'] = debut_year
             actor_info['gender'] = self.gender
             actors.append(actor_info)
-            actor_id += 1
-            if actor_id < 13:
+            act_id += 1
+            if act_id < 13:
                 # 처음 내가 보여주고 싶은 12명
                 actor_info['state'] = "1"
             else:
                 # 나머지는 블라인드 처리
                 actor_info['state'] = "0"
-            if actor_id % 50 == 10:
-                print("working on it", actor_id)
+            if act_id % 50 == 10:
+                print("working on it", act_id)
                 print("하고 있어!!!!!!!")
                 print("하고 있어!!!!!!!")
                 print("하고 있어!!!!!!!")
@@ -132,12 +135,12 @@ class ActorDfo:
                 # 지금 crawling 되고 있는지 확인
         print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
-        # dict_keys(['photo_url', 'age', 'actor_id', 'name', 'real_name',
+        # dict_keys(['photo_url', 'age', 'act_id', 'name', 'real_name',
         #            'religion', 'agency', 'spouse', 'children', 'debut_year',
         #            'gender'])
         # List of Dict 을 데이터 프레임으로 만들어주기
         data = DataFrame(actors,
-                         columns=['photo_url', 'age', 'actor_id', 'name',
+                         columns=['photo_url', 'age', 'act_id', 'name',
                                   'real_name', 'religion', 'agency', 'spouse',
                                   'children', 'debut_year', 'gender', 'state'])
         return data

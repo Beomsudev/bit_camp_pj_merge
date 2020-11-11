@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import Link from '@material-ui/core/Link'
 // import Link from 'react-router-dom'
-import Chatbot from '../cht/Chatbot'
+import MyChatbot from '../cht/MyChatbot'
 
 function Copyright() {
   return (
@@ -76,6 +76,9 @@ export default function ActorQuizSingle() {
   const backToList = () => {
     // 기존의 모든 배우를 볼 수 있는 화면으로 돌아간다
     history.push("./actorquiz")
+  }
+  const regame = () => {
+    window.location.reload()
   }
   const classes = useStyles()
   const [data, setData] = useState([])
@@ -151,10 +154,13 @@ export default function ActorQuizSingle() {
                     <Typography>
                       데뷔년도 {data['debut_year']}
                     </Typography>
+                    <Typography>
+                      배우자 {data['spouse']}
+                    </Typography>
                   </CardContent>
                   
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={regame}>
                       게임 시작
                     </Button>
                     <Button size="small" color="primary" onClick={backToList}>
@@ -166,7 +172,7 @@ export default function ActorQuizSingle() {
               <Grid item xs={12} sm={8}  > 
                 {/* style={{"border": "1px solid black"}} */}
                 {/* 여기 chatbot 들어갈 거임 */}
-                <Chatbot/>
+                <MyChatbot/>
                 {/* <Chatbot/> */}
               </Grid>
           </Grid>

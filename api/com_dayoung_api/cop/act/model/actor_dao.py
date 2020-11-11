@@ -1,33 +1,20 @@
 import json
 import pandas as pd
 from sqlalchemy import func
-
 from com_dayoung_api.ext.db import db, openSession
-from com_dayoung_api.cop.act.model.actor_kdd import Crawling
+from com_dayoung_api.cop.act.model.actor_kdd import ActoKdd
 from com_dayoung_api.cop.act.model.actor_dto import ActorDto
 from com_dayoung_api.cop.act.model.actor_dfo import ActorDfo
 
 Session = openSession()
 session = Session()
-actor_preprocess = Crawling()
+actor_preprocess = ActorDfo()
 
 class ActorDao(ActorDto):
-    @staticmethod
-    def add(actor_name):
-        crawl = Crawling(actor_name)
-        df = crawl.crawl()
-        actor = df.to_dict(orient="records")
-        actor = actor[0]
-        actor = ActorDto(**actor)
-        Session = openSession()
-        session = Session()
-        print("---------------------------------------------")
-        db.session.add(actor)
-        db.session.commit()
-        session.close()
 
     def bulk():
-        df = actor_preprocess.crawl()
+        df = actor_preprocess.actors_to_df()
+        print("-----------------------------------------------------------------")
         print(df.head())
         session.bulk_insert_mappings(ActorDto, df.to_dict(orient="records"))
         session.commit()

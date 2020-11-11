@@ -122,16 +122,16 @@ export default function Nav(props) {
           <Button>
             <Link to="/rating" className={classes.link}>영화 별점</Link>
           </Button>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <AccountCircle>
-              <Link to="/" className={classes.link}></Link>
-            </AccountCircle>
-          </IconButton>
+          <Link to="/userprofile" className={classes.link}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle/>
+            </IconButton>
+          </Link>
         </Typography>
         </div>:
           <div>

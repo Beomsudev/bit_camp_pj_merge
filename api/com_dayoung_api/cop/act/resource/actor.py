@@ -1,5 +1,4 @@
 from flask_restful import Resource, reqparse
-
 from com_dayoung_api.cop.act.model.actor_dao import ActorDao
 
 parser = reqparse.RequestParser()
@@ -11,7 +10,7 @@ parser.add_argument('password', type=str, required=True,
 class Actor(Resource):
     @staticmethod
     def get(id: str):
-        print(f'Actor {id} added ')
+        print(f'Actor {id} get ')
         try:
             actor = ActorDao.find_by_id(id)
             data = actor.json()

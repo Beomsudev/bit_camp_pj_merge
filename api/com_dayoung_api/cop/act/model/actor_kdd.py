@@ -2,10 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import re  # 정규식 사용
 from pandas import DataFrame
-from com_dayoung_api.cop.act.model.actor_dfo import ActorDfo
 
 
-class Crawling:
+class ActoKdd:
     '''
         Crawls data from wikipedia with following information
         attributes: ['사진', '나이','이름','본명','종교','소속사', '배우자', '자녀','데뷔년도']
@@ -22,18 +21,8 @@ class Crawling:
                        ("김혜수",  "f"), ("현빈",  "m"), ("송강호",  "m"),
                        ("지창욱",  "m"), ("한효주",  "f"), ("정해인",  "m")]
         actors_name_2 = self.crawl_actors_name()
-        # actors_name.extend(actors_name_2)
-        actor_id = 1
-        # actors_name = ["이병헌", "이진욱"]
-        # actors_name = [('이병헌', "m")]
-        Dfo = ActorDfo()
-        act_df = Dfo.actors_to_df(actors_name, actor_id)
-        mycolumns = {
-        'actor_id':'act_id'
-        }
-        sort_df = act_df.rename(columns=mycolumns)
-        data = sort_df
-        return data
+        actors_name.extend(actors_name_2)
+        return actors_name
 
     def crawl_actors_name(self):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"}
@@ -66,5 +55,5 @@ class Crawling:
 
 # 이 코딩만 확인 하고 싶을 시
 # if __name__ == '__main__':
-#     c = Crawling()
+#     c = AcorKdd()
 #     c.crawl()

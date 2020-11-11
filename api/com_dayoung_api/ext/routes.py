@@ -7,6 +7,8 @@ from com_dayoung_api.usr.resource.access import Access
 
 from com_dayoung_api.cop.act.resource.actor import Actor, Actors, AddActor
 
+from com_dayoung_api.cop.cht.resource.chatbot import Chatbot
+
 from com_dayoung_api.cop.mov.resource.movie import Movie, Movies
 from com_dayoung_api.cop.mov.resource.search import MovieSearch
 from com_dayoung_api.cop.mov.resource.movie_del import MovieDel
@@ -53,6 +55,12 @@ api = Api(actors)
 api = Api(delete)
 api = Api(addActor)
 ############################## ACTOR ##############################
+
+############################## CHATBOT ##############################
+chatbot = Blueprint('chatbot', __name__, url_prefix='/api/chatbot')
+
+api = Api(chatbot)
+############################## CHATBOT ##############################
 
 ############################## MOVIE ##############################
 movie = Blueprint('movie', __name__, url_prefix='/api/movie')
@@ -113,6 +121,10 @@ def initialize_routes(api):
     api.add_resource(Delete, '/api/delete/<string:id>')
     api.add_resource(Actors, '/api/actors')    
 ############################## ACTOR ##############################
+
+############################## CHATBOT ############################
+    api.add_resource(Chatbot, '/api/chatbot') 
+############################## CHATBOT ############################
 
 ############################## MOVIE ##############################
     api.add_resource(Movie, '/api/movie')

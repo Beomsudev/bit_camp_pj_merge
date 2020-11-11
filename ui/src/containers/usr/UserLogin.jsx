@@ -71,7 +71,7 @@ export default function UserLogin() {
     e.preventDefault()
     axios.post(`http://localhost:8080/api/access`, {"usr_id":usr_id, "password":password})
         .then(res => {
-            alert(`Welcome ! ${res.data["fname"]}.  ${res.data["usr_id"]}'s connection is successful. ! `)
+            // alert(`Welcome ! ${res.data["fname"]}.  ${res.data["usr_id"]}'s connection is successful. ! `)
 
             sessionStorage.setItem("sessionUser", res.data['usr_id'])
             

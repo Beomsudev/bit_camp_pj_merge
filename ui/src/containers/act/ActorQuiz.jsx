@@ -196,7 +196,7 @@ export default function ActorQuiz() {
                   
                   <CardActions>
                     <Button size="small" color="primary" actorid={i.act_id} onClick={e => selectActor(i.act_id)} >
-                      View {i.act_id}
+                      View
                     </Button>
                     <Button size="small" color="primary" onClick={e => deleteActor(i.act_id)}>
                       Delete

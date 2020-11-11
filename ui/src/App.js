@@ -7,7 +7,7 @@ import { ActorQuiz, ActorQuizSingle } from './containers/act'
 import { RatingDetail, RatingList, RatingModify, RatingRegister, RatingRemove } from './containers/rat'
 import { MovieDetail, MovieList, MovieModify, MovieRegister, MovieRemove } from './containers/mov'
 import { ReviewContainer, ReviewListContainer, MyReview, ReviewWrite, ReviewEdit } from './containers/rev'
-import { Chatbot } from './containers/cht'
+import { MyChatbot } from './containers/cht'
 
 // react -> redux -> thunk -> saga -> Mobx
 export default function App(){
@@ -26,7 +26,7 @@ export default function App(){
       <Route path ='/actorquiz' component={ActorQuiz}/>
       <Route path ='/actorquizsingle' component={ActorQuizSingle}/>
       <Route path ='/userprofile' component={UserProfile}/>
-      <Route path ='/chatbot' component={Chatbot}/>
+      <Route path ='/chatbot' component={MyChatbot}/>
       <Route path='/rating' component={Rating}/>
       <Route path='/rating-detail' component={RatingDetail}/>
       <Route path='/rating-register' component={RatingRegister}/>
