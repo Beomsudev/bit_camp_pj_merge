@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   toolbar: {
-      background: '#D5D8DC'
+    background: '#D5D8DC'
   },
 
   title: {
@@ -78,14 +78,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function Nav(props) {
   const classes = useStyles();
-
+  const history  = useHistory()
+    const logout = e => {
+        alert('logout')
+        e.preventDefault();
+        sessionStorage.removeItem("sessionUser")
+        history.push('/')
+        window.location.reload()
+    }
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar className={classes.toolbar}>
-          <IconButton
+       <Toolbar className={classes.toolbar}>
+       {props.isAuth !== null
+        ? <div>  
+            <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
@@ -94,14 +103,15 @@ export default function SearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/" className={classes.link}>다영이</Link>
-          </Typography>
-          <Typography style = {{paddingLeft: 20}}>
+          <Link to="/" className={classes.link}>다영이</Link>
+        </Typography>
+        <Typography style={{ paddingLeft: 20 }}>
           <Button>
             <Link to="/userregister" className={classes.link}>회원 가입</Link>
           </Button>
-          <Button>
-            <Link to="/userlogin" className={classes.link}>로그인</Link>
+          <Button onClick = {logout}>
+            로그아웃
+            {/* <Link to="/userlogin" className={classes.link}>로그아웃</Link> */}
           </Button>
           <Button>
             <Link to="/actorquiz" className={classes.link}>배우</Link>
@@ -113,32 +123,40 @@ export default function SearchAppBar() {
             <Link to="/rating" className={classes.link}>영화 별점</Link>
           </Button>
           <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <AccountCircle>
-            <Link to="/" className={classes.link}></Link>
-                </AccountCircle>                
-              </IconButton>
-
-          </Typography>
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div> */}
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle>
+              <Link to="/" className={classes.link}></Link>
+            </AccountCircle>
+          </IconButton>
+        </Typography>
+        </div>:
+          <div>
+            <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography className={classes.title} variant="h6" noWrap>
+          <Link to="/" className={classes.link}>다영이</Link>
+        </Typography> 
+          <Button>
+          <Link to="/userregister" className={classes.link}>회원 가입</Link>
+        </Button>
+        <Button>
+          <Link to="/userlogin" className={classes.link}>로그인</Link>
+        </Button>
+        </div>
+      }  
         </Toolbar>
+     
       </AppBar>
-    </div>
+    </div >
   );
 }

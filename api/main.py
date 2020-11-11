@@ -15,9 +15,11 @@ from com_dayoung_api.cop.rat.model.rating_dao import RatingDao
 
 from com_dayoung_api.cop.rev.model.review_dao import ReviewDao
 
-from com_dayoung_api.cop.mov.resource.recommendation import MovieRecommendation
-from com_dayoung_api.cop.mov.model.movie_dfo import MovieDfo
-from com_dayoung_api.cop.mov.model.movie_ai import MovieAi
+'''
+범수 테스트 지우지 마세요.
+# from com_dayoung_api.cop.mov.resource.recommendation import MovieRecommendation
+# from com_dayoung_api.cop.mov.model.movie_dfo import MovieDfo
+# from com_dayoung_api.cop.mov.model.movie_ai import MovieAi
 
 # a = MovieRecommendation()
 # a.hook()
@@ -25,53 +27,54 @@ from com_dayoung_api.cop.mov.model.movie_ai import MovieAi
 # b = MovieDfo()
 # b.hook()
 
-c = MovieAi()
-c.hook('Toy Story')
+# c = MovieAi()
+# c.hook('Toy Story')
+'''
 
-# app = Flask(__name__)
-# CORS(app, resources={r'/api/*': {"origins": "*"}})
+app = Flask(__name__)
+CORS(app, resources={r'/api/*': {"origins": "*"}})
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = url
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db.init_app(app)
-# api = Api(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+api = Api(app)
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
     
-# with app.app_context():
-#     print('***** 데이터 DB 삽입 *****')
-#     count_user = UserDao.count()    
-#     count_actor = ActorDao.count()
-#     count_movie = MovieDao.count()
-#     count_rating = RatingDao.count()    
-#     count_review = ReviewDao.count()
+with app.app_context():
+    print('***** 데이터 DB 삽입 *****')
+    count_user = UserDao.count()    
+    count_actor = ActorDao.count()
+    count_movie = MovieDao.count()
+    count_rating = RatingDao.count()    
+    count_review = ReviewDao.count()
 
-#     print(f'USR TABLE COUNT : {count_user[0]:6}')
-#     print(f'ACT TABLE COUNT : {count_actor[0]:6}')
-#     print(f'MOV TABLE COUNT : {count_movie[0]:6}')
-#     print(f'RAT TABLE COUNT : {count_rating[0]:6}')
-#     print(f'REV TABLE COUNT : {count_review[0]:6}')
+    print(f'USR TABLE COUNT : {count_user[0]:6}')
+    print(f'ACT TABLE COUNT : {count_actor[0]:6}')
+    print(f'MOV TABLE COUNT : {count_movie[0]:6}')
+    print(f'RAT TABLE COUNT : {count_rating[0]:6}')
+    print(f'REV TABLE COUNT : {count_review[0]:6}')
     
-#     if count_user[0] == 0:
-#         print('***** USR DATA INSERT *****')
-#         UserDao.bulk()
+    if count_user[0] == 0:
+        print('***** USR DATA INSERT *****')
+        UserDao.bulk()
 
-#     if count_actor[0] == 0:
-#         print('***** ACT DATA INSERT *****')
-#         ActorDao.bulk()
+    if count_actor[0] == 0:
+        print('***** ACT DATA INSERT *****')
+        ActorDao.bulk()
 
-#     if count_movie[0] == 0:
-#         print('***** MOV DATA INSERT *****')
-#         MovieDao.bulk()
+    if count_movie[0] == 0:
+        print('***** MOV DATA INSERT *****')
+        MovieDao.bulk()
 
-#     if count_rating[0] == 0:
-#         print('***** RAT DATA INSERT *****')
-#         RatingDao.bulk()
+    if count_rating[0] == 0:
+        print('***** RAT DATA INSERT *****')
+        RatingDao.bulk()
 
-#     # if count_review[0] == 0:
-#     #     print('***** REV DATA INSERT *****')
-#     #     ReviewDao.insert_many()
+    # if count_review[0] == 0:
+    #     print('***** REV DATA INSERT *****')
+    #     ReviewDao.insert_many()
 
-# print('********** INITIALIZE **********')
-# initialize_routes(api)
+print('********** INITIALIZE **********')
+initialize_routes(api)

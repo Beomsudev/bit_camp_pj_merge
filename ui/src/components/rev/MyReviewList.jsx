@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MyReviewList() {
   const classes = useStyles();
   const [data, setData] = useState([])
-  const userId = localStorage.getItem('user_id')
+  const userId = sessionStorage.getItem('sessionUser')
   useEffect(() => {
     axios.get(`http://localhost:8080/api/myreview/${userId}`)
     .then(res=> {
@@ -36,18 +36,17 @@ export default function MyReviewList() {
 
 const fetchSomeReview = useCallback(async e=> {
   alert("진입")
-  const title = document.querySelector('#revTitle').value
-  alert(title)
+  const movieTitle = document.querySelector('#movieTitle').value
+  alert(movieTitle)
   try {
       const req = {
           method: c.get,
-          url: `${c.url}/api/reviewsearch${title}`,
+          url: `${c.url}/api/reviewsearch/${movieTitle}`,
           // data: {params: title},
           auth: c.auth
 
       }
       const res = await axios(req)
-      alert(res.rev_id)
       setData(res.data)
   } catch (error){
       alert(`fetchSomeReviews failure ${error}`)
@@ -64,16 +63,17 @@ const revid = e => {
     <React.Fragment>
       <Title>My Reviews</Title>
       <div>
-      <input type="text" id='revTitle' placeholder ="Type Movie"/> 
+      <input type="text" id='movieTitle' placeholder ="Type Movie"/> 
             <button onClick={fetchSomeReview}>Search</button>
             </div>      
       <Table size="small" className = "tbsize">
         <TableHead>
           <TableRow>
             
-            <TableCell>ID</TableCell>
+            <TableCell>닉네임</TableCell>
             <TableCell>영화</TableCell>
             <TableCell>리뷰 제목</TableCell>
+            <TableCell>내용</TableCell>
             <TableCell>평가</TableCell>
             <TableCell align="right">수정</TableCell>
           </TableRow>
@@ -81,9 +81,10 @@ const revid = e => {
         <TableBody>
           {data.map((i, index) => (
             <TableRow key={index}>
-                <TableCell>{i.usr_id}</TableCell>
-                <TableCell>{i.mov_id}</TableCell>
+                <TableCell>{i.fname}</TableCell>
+                <TableCell>{i.title_kor}</TableCell>
                 <TableCell>{i.title}</TableCell>
+                <TableCell>{i.content}</TableCell>
                 <TableCell>{((i.label == 1) ? <Emoji symbol="⭐️"/> : <Emoji symbol="❌"/>)}</TableCell>
                 <TableCell align="right">
                     <button>

@@ -73,6 +73,7 @@ export default function ReviewEdit() {
     axios.put(`http://localhost:8080/api/review/${revId}`,{'title':title, 'content': content})
     .then(res => {
         alert(`Update SUCCESS`)
+        history.push('/review-container')
     })
     .catch(
         e => {

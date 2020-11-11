@@ -62,7 +62,7 @@ class MovieDfo:
         
         print('***** 무비 렌즈 UI용 DF가공 완료 *****')
 
-        return merge_movie_lens_kmdb_naver_df.head(30)
+        return merge_movie_lens_kmdb_naver_df
         # print(movie_lens_meta_df)
         # print(movie_lens_keyword_df)
         # print(movie_lens_credits_df)

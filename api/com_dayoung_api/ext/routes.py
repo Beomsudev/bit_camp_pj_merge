@@ -21,6 +21,7 @@ from com_dayoung_api.cop.rev.resource.my_review import MyReview
 from com_dayoung_api.cop.rev.resource.score import ReviewScore
 from com_dayoung_api.cop.rev.resource.search import ReviewSearch
 from com_dayoung_api.cop.rev.resource.emotion import ReviewEmotion
+from com_dayoung_api.cop.rev.resource.top import ReviewTop
 
 ############################## HOME ##############################
 from com_dayoung_api.cop.hom.resource.home import Home
@@ -86,6 +87,7 @@ myreview = Blueprint('myreview', __name__, url_prefix='/api/myreview')
 reviewscore = Blueprint('reviewscore', __name__, url_prefix='/api/reviewscore')
 reviewsearch = Blueprint('reviewsearch', __name__, url_prefix='/api/reviewsearch')
 reviewemotion = Blueprint('reviewemotion', __name__, url_prefix='/api/reviewemotion')
+reviewtop = Blueprint('reviewtop', __name__, url_prefix='/api/reviewtop')
 
 api = Api(review)
 api = Api(reviews)
@@ -93,6 +95,7 @@ api = Api(myreview)
 api = Api(reviewscore)
 api = Api(reviewsearch)
 api = Api(reviewemotion)
+api = Api(reviewtop)
 ############################## REVIEW ##############################
 
 def initialize_routes(api):
@@ -133,4 +136,5 @@ def initialize_routes(api):
     api.add_resource(ReviewScore, '/api/reviewscore')
     api.add_resource(ReviewSearch, '/api/reviewsearch<string:movie_title>')
     api.add_resource(ReviewEmotion, '/api/reviewemotion/<string:content>')
+    api.add_resource(ReviewTop, '/api/reviewtop')
 ############################## REVIEW ##############################

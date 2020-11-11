@@ -234,7 +234,6 @@ class MovieAi:
     #     emb = md.apply(lambda x: pd.Series(x['genres']), axis=1).stack().reset_index(level=1, drop=True)
     #     emb.name = 'genre'
     #     print(emb.head(10))
-
     #     gen_md = md.drop('genres', axis=1).join(emb)
     #     print(gen_md.head(10))
 
@@ -369,11 +368,6 @@ class MovieAi:
         smd = smd.reset_index()
         titles = smd['title']
         indices = pd.Series(smd.index, index=smd['title'])
-
-        # a = self.get_recommendations_with_tfidf('The Godfather').head(10)
-        # b = self.get_recommendations_with_tfidf('Inception').head(10)
-        # print(a)
-        # print(b)
 
         self.indices = indices
         self.cosine_sim = cosine_sim
