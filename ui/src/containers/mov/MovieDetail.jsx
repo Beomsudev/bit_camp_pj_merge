@@ -155,6 +155,9 @@ export default function MovieDetail() {
                     <Typography>
                       {i.genres_kor}
                     </Typography>
+                    {/* <Typography>
+                      {i.keyword_kor}
+                    </Typography> */}
                     <Typography>
                       {i.running_time_kor}분
                     </Typography>
