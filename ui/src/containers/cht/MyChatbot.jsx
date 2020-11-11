@@ -100,10 +100,10 @@ class Answer extends Component {
     // {"age":50, "real_name":1, "religion":1,"agency":1,"spouse":1,"children":1, "debut":1991,"gender":1})
     {"age":age, "real_name":name, "religion":religion,"agency":agency,"spouse":spouse,"children":children, "debut":debut,"gender":gender})
     .then(res=>{
-      alert("분석 성공")
+      // alert("분석 성공")
       //this.setState(res.data)
-      this.state.target_name = res.data
-      alert(this.state.target_name)
+      localStorage.setItem("actor", this.state.target_name)
+      // alert(this.state.target_name)
     }) 
     .catch(e => {
       alert('분석 실패')
@@ -113,10 +113,9 @@ class Answer extends Component {
   
   render() {
     const {target_name} = this.state;
-    console.log(target_name)
     return (
       <div style={{ width: '100%' }}>
-        <h3> {target_name} 입니다</h3>
+        <h3> {localStorage.getItem("actor")} 입니다</h3>
       </div>
     );
   }
@@ -331,6 +330,7 @@ class MyChatbot extends Component {
         {
           id: 'end-message',
           component: <Answer />,
+          waitAction: true,
           asMessage: true,
           end: true,
         },

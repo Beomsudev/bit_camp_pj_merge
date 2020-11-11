@@ -15,15 +15,6 @@ export const UserMenu = () => <nav>
     
 </nav>
 
-export const RatingMenu = () => (<nav>
-    <ol>
-        <li><Link to='/rating-detail'>Movie Rating</Link></li>
-        <li><Link to='/rating-register'>Movie Rating Register</Link></li>
-        <li><Link to='/rating-list'>Movie Rating List</Link></li>
-        <li><Link to='/rating-modify'>Movie Rating Modify</Link></li>
-        <li><Link to='/rating-remove'>Movie Rating Remove</Link></li>
-    </ol>
-</nav>)
 
 export const ActorMenu = () => <nav>
     <ol>

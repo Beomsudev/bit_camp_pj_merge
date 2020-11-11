@@ -31,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
+  dayoungTitle: {
+    fontsize: '1 rem',
+    textDecoration: 'none',
+    color: 'white',
+  },
+
   link: {
     fontsize: '1 rem',
     textDecoration: 'none',
@@ -103,7 +109,7 @@ export default function Nav(props) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/" className={classes.link}>다영이</Link>
+          <Link to="/movie-detail" className={classes.dayoungTitle}>다영이</Link>
         </Typography>
         <Typography style={{ paddingLeft: 20 }}>
           <Button>
@@ -118,9 +124,6 @@ export default function Nav(props) {
           </Button>
           <Button>
             <Link to="/review-container" className={classes.link}>리뷰</Link>
-          </Button>
-          <Button>
-            <Link to="/rating" className={classes.link}>영화 별점</Link>
           </Button>
           <Link to="/userprofile" className={classes.link}>
             <IconButton
