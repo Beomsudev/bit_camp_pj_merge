@@ -75,8 +75,9 @@ export default function UserLogin() {
 
             sessionStorage.setItem("sessionUser", res.data['usr_id'])
             
-            // window.location.reload()
             history.push("/")  // 여기 치는 부분으로 이동
+            window.location.reload()
+
         })
         .catch(error => {
             alert("Please check your ID or password.")
