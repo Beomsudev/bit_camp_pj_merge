@@ -11,7 +11,7 @@ from pandas import DataFrame
 from pathlib import Path
 from com_dayoung_api.cmm.util.file_helper import FileReader, FileChecker
 
-class MovieDf:
+class MovieDfo:
     '''
     kmdb_naver_search\saved_data\naver_movie_search_merge.csv
     resources\data\movie_lens\movies_metadata.csv
@@ -53,13 +53,9 @@ class MovieDf:
         print('***** 무비 렌즈 UI용 DF가공 시작 *****')
 
         movie_lens_meta_df = self.read_movie_lens_meta_csv()
-        # movie_lens_keyword_df = self.read_movie_lens_keyword_csv()
-        # movie_lens_credit_df = self.read_movie_lens_credit_csv()
         kmdb_naver_df = self.read_kmdb_naver_csv()
 
         arrange_movie_lens_meta_df = self.arrange_movie_lens_meta_df(movie_lens_meta_df)
-        # arrange_movie_lens_keyword_df = self.arrange_movie_lens_keyword_df(movie_lens_keyword_df)
-        # arrange_movie_lens_credit_df = self.arrange_movie_lens_credit_df(movie_lens_credit_df)
         arrange_kmdb_naver_df = self.arrange_kmdb_naver_df(kmdb_naver_df)
 
         merge_movie_lens_kmdb_naver_df = self.merge_movie_lens_kmdb_naver_df(arrange_movie_lens_meta_df, arrange_kmdb_naver_df)
@@ -81,26 +77,6 @@ class MovieDf:
         movie_lens_meta_df = pd.read_csv(path + fname, encoding='utf-8')
         print('***** 무비렌즈 메타 데이터 읽기 완료*****')
         return movie_lens_meta_df
-        
-    def read_movie_lens_keyword_csv(self):
-        print('***** 무비렌즈 키워드 데이터 읽기*****')
-        # path = os.path.abspath("")
-        # fname = '\com_dayoung_api\\resources\data\movie_lens\keywords.csv'
-        path = os.path.abspath("")
-        fname = '\data\movie_lens\keywords.csv'
-        movie_lens_keyword_df = pd.read_csv(path + fname, encoding='utf-8')
-        print('***** 무비렌즈 키워드 데이터 읽기 완료*****')
-        return movie_lens_keyword_df
-
-    def read_movie_lens_credit_csv(self):
-        print('***** 무비렌즈 크레딧 데이터 읽기*****')
-        # path = os.path.abspath("")
-        # fname = '\com_dayoung_api\\resources\data\movie_lens\credits.csv'
-        path = os.path.abspath("")
-        fname = '\data\movie_lens\credits.csv'
-        movie_lens_credits_df = pd.read_csv(path + fname, encoding='utf-8')
-        print('***** 무비렌즈 크레딧 데이터 읽기 완료*****')
-        return movie_lens_credits_df
 
     def read_kmdb_naver_csv(self):
         print('***** kmdb 네이버 데이터 읽기*****')
@@ -324,80 +300,6 @@ class MovieDf:
         return final_movie_lens_meta_df
         print('***** 무비렌즈 메타 데이터 가공 완료 *****')
 
-    def arrange_movie_lens_keyword_df(self, movie_lens_keyword_df):
-        print('***** 무비렌즈 키워드 데이터 가공 *****')
-        '''
-        [original columns]
-        id,
-        keywords
-        '''
-
-        ##### column 정렬 및 이름 변경 #####
-        column_sort_df = movie_lens_keyword_df[['id',
-                            'keywords']]
-
-        mycolumns = {
-            'id':'movieid'
-        }
-
-        sort_df = column_sort_df.rename(columns=mycolumns)
-        ##### column 정렬 및 이름 변경 #####
-
-        ##### id 기준 중복 값 제거 #####
-        print('중복 ID 제거 전 : ', sort_df.duplicated(['movieid']).sum())
-        drop_duplicates_df = sort_df.drop_duplicates(subset='movieid', keep='first', inplace=False)
-        print('중복 ID 제거 후 : ', drop_duplicates_df.duplicated(['movieid']).sum())
-        ##### id 기준 중복 값 제거 #####
-        
-        final_movie_lens_keyword_df = drop_duplicates_df
-
-        filechecker.df_null_check(final_movie_lens_keyword_df)
-        
-
-        print('***** 무비렌즈 키워드 데이터 가공 완료 *****')
-        return final_movie_lens_keyword_df
-
-    def arrange_movie_lens_credit_df(self, movie_lens_credit_df):
-        '''
-        [original columns]
-        cast,
-        crew,
-        id
-        '''
-        fchecker = self.filechecker
-        fchecker.df_null_check(movie_lens_credit_df)
-        print(movie_lens_credit_df)
-        print(movie_lens_credit_df.columns)
-    
-        ##### 데이터 축소 #####
-        '''
-        cast : director 만 추출
-        crew : actor 상위 3명만 추출
-        '''
-        
-        new_genres_list = pd.Series.to_list(movie_lens_credit_df['cast'])   # 장르 축소
-
-        mylist1 = []
-        
-        for d in range(0, len(new_genres_list)):
-            eval_str = ast.literal_eval(new_genres_list[d])
-            temp_list = []
-        print(temp_list)
-        
-        #     for i in range(0, len(eval_str)):
-        #         temp_list.append(eval_str[i]['Director'])
-        #     mylist1.append(str(temp_list))
-       
-        # new_genres = pd.DataFrame(mylist1, columns=['new_genres'])
-        # print(new_genres)
-        # reduction_df = fill_na_df.drop(['genres'], axis=1)
-        # reduction_df = pd.concat([reduction_df, new_genres], axis=1)
-        # print(reduction_df)
-        # reduction_df.to_csv('test.csv', encoding='utf-8')
-
-        ##### 데이터 축소 #####
-
-
     def arrange_kmdb_naver_df(self, kmdb_naver_df):
         print('***** kmdb naver 데이터 가공 *****')
         fchecker = self.filechecker
@@ -458,12 +360,9 @@ class MovieDf:
                                     'title_naver',
                                     'userrating_naver',
                                     'id'], axis=1)
-        # print(drop_df)
-        # print(drop_df.columns)
         ##### 필요없는 column 삭제 #####
 
         ##### null 값 대체 #####
-
         '''
         title                     : null count =      0
         genre                     : null count =      0
@@ -476,7 +375,6 @@ class MovieDf:
         director_naver            : null count =    463 -> null_vlaue 대체
         actor_naver               : null count =   4433 -> null_vlaue 대체
         '''
-
         title_fill_na = drop_df['title']
         genre_fill_na = drop_df['genre']
         running_time_fill_na = drop_df['running_time'].fillna('0')
@@ -510,7 +408,6 @@ class MovieDf:
                                 director_naver_fill_na, 
                                 actor_naver_fill_na],
                                 axis=1)
-        # fill_na_df = fill_na_df.dropna()
         ##### null 값 대체 #####
 
         ##### 데이터 축소 #####
@@ -535,8 +432,8 @@ class MovieDf:
             drop_last_r = new_director.rstrip('|')
             split_new_director = drop_last_r.split('|')
             mylist2.append(str(split_new_director[:3]))
-        
         new_director_df = pd.DataFrame(mylist2, columns=['new_director_naver'])
+        new_director_df = new_director_df['new_director_naver'].str.replace(pat=r'[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9\,\ ]', repl='', regex=True)
 
         actor_list = pd.Series.to_list(fill_na_df['actor_naver'])
         mylist3 = []
@@ -546,9 +443,8 @@ class MovieDf:
             drop_last_r = new_actor.rstrip('|')
             split_new_actor = drop_last_r.split('|')
             mylist3.append(str(split_new_actor[:3]))
-            
         new_actor_df = pd.DataFrame(mylist3, columns=['new_actor_naver'])
-
+        new_actor_df = new_actor_df['new_actor_naver'].str.replace(pat=r'[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9\,\ ]', repl='', regex=True)
 
         reduction_df = fill_na_df.drop(['subtitle_naver', 'director_naver', 'actor_naver'], axis=1)
         reduction_df = pd.concat([reduction_df, new_subtitle_naver, new_director_df, new_actor_df], axis=1)
@@ -672,7 +568,7 @@ class MovieDf:
         return final_merge_df
 
 # if __name__ == "__main__":
-#     service = MovieDf()
+#     service = MovieDfo()
 #     service.hook()
 
     print('***** 무비 렌즈 서비스 완료 *****')

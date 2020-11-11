@@ -3,7 +3,6 @@ from flask_restful import Resource, reqparse
 
 from com_dayoung_api.cop.mov.model.movie_dao import MovieDao
 from com_dayoung_api.cop.mov.model.movie_dto import MovieDto
-from com_dayoung_api.cop.mov.model.movie_dfo import MovieDf
 
 class Movie(Resource):
     @staticmethod
@@ -94,7 +93,7 @@ class Movies(Resource):
 
     @staticmethod
     def get():
-        data = MovieDao.find_all()
+        data = MovieDao.find_all_sort_random()
         print(data[0])
         return data, 200        
 

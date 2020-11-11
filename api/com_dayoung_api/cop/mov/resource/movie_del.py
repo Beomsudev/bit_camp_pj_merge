@@ -3,7 +3,6 @@ from flask_restful import Resource, reqparse
 
 from com_dayoung_api.cop.mov.model.movie_dao import MovieDao
 from com_dayoung_api.cop.mov.model.movie_dto import MovieDto
-from com_dayoung_api.cop.mov.model.movie_dfo import MovieDf
 
 class MovieDel(Resource):
     

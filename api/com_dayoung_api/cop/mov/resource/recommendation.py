@@ -5,7 +5,6 @@ import pandas as pd
 
 from com_dayoung_api.cop.mov.model.movie_dao import MovieDao
 from com_dayoung_api.cop.mov.model.movie_dto import MovieDto
-from com_dayoung_api.cop.mov.model.movie_dfo import MovieDf
 from com_dayoung_api.cop.mov.model.movie_ai import MovieAi
 
 

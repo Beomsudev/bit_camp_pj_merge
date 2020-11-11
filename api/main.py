@@ -16,10 +16,13 @@ from com_dayoung_api.cop.rat.model.rating_dao import RatingDao
 from com_dayoung_api.cop.rev.model.review_dao import ReviewDao
 
 from com_dayoung_api.cop.mov.resource.recommendation import MovieRecommendation
+from com_dayoung_api.cop.mov.model.movie_dfo import MovieDfo
 
 # a = MovieRecommendation()
 # a.hook()
 
+# b = MovieDfo()
+# b.hook()
 app = Flask(__name__)
 CORS(app, resources={r'/api/*': {"origins": "*"}})
 

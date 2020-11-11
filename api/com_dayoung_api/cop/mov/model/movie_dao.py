@@ -20,7 +20,7 @@ from sqlalchemy import func
 from com_dayoung_api.ext.db import db, openSession
 
 from com_dayoung_api.cop.mov.model.movie_dto import MovieDto
-from com_dayoung_api.cop.mov.model.movie_dfo import MovieDf
+from com_dayoung_api.cop.mov.model.movie_dfo import MovieDfo
 
 Session = openSession()
 session = Session()
@@ -30,7 +30,7 @@ class MovieDao(MovieDto):
     @staticmethod
     def bulk():
         print('***** [movies_recommendation] df 삽입 *****')
-        recomoviedf = MovieDf()
+        recomoviedf = MovieDfo()
         df = recomoviedf.hook()
         print(df)
         session.bulk_insert_mappings(MovieDto, df.to_dict(orient='records'))
@@ -78,6 +78,15 @@ class MovieDao(MovieDto):
         sql = cls.query
         df = pd.read_sql(sql.statement, sql.session.bind)
         return json.loads(df.to_json(orient='records'))
+
+    @classmethod
+    def find_all_sort_random(cls):
+        print('***** find all movie_reco *****')
+        sql = cls.query
+        df = pd.read_sql(sql.statement, sql.session.bind)
+        df = df.sample(frac=1)
+        return json.loads(df.to_json(orient='records'))
+
 
 # mov_id,movie_l_title,movie_l_org_title,movie_l_genres,movie_l_year,movie_l_rating,movie_l_rating_count
     @staticmethod
