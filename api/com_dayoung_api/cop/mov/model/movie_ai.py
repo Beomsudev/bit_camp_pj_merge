@@ -31,82 +31,82 @@ class MovieAi:
         md = self.preprocess()
         print(f'메타 데이터 전처리 완료 : {md.head()}')
 
-        qualified = self.create_qualified()
-        print(f'별점 상위 5% 데이터 : {qualified.head()}')
+        # qualified = self.create_qualified()
+        # print(f'별점 상위 5% 데이터 : {qualified.head()}')
 
-        x = qualified
-        qualified['wr'] = qualified.apply(self.weighted_rating, axis=1)
-        qualified = qualified.sort_values('wr', ascending=False).head(250)
-        print(f' Vote 상위 5% 값 : {qualified.head(15)}')
+        # x = qualified
+        # qualified['wr'] = qualified.apply(self.weighted_rating, axis=1)
+        # qualified = qualified.sort_values('wr', ascending=False).head(250)
+        # print(f' Vote 상위 5% 값 : {qualified.head(15)}')
 
-        emb_proc = self.emb_proc()
-        print(f' 장르 EMBEDING : {emb_proc}')
+        # emb_proc = self.emb_proc()
+        # print(f' 장르 EMBEDING : {emb_proc}')
 
         smd = self.create_smd()
         # description = overview + tagline
-        print(f' SMALL 메타 데이터 (약1만개) : {qualified.head()}')
+        # print(f' SMALL 메타 데이터 (약1만개) : {qualified.head()}')
 
-        tfidf_matrix = self.creat_tfidf_matrix()
+        # tfidf_matrix = self.creat_tfidf_matrix()
         # TEST 줄거리(tfidf) 기반 추천
-        print(self.get_recommendations_with_tfidf('The Godfather').head(10)) # 대부1
-        '''
-        973      The Godfather: Part II
-        8387                 The Family
-        3509                       Made
-        4196         Johnny Dangerously
-        29               Shanghai Triad
-        5667                       Fury
-        2412             American Movie
+        # print(self.get_recommendations_with_tfidf('The Godfather').head(10)) # 대부1
+        # '''
+        # 973      The Godfather: Part II
+        # 8387                 The Family
+        # 3509                       Made
+        # 4196         Johnny Dangerously
+        # 29               Shanghai Triad
+        # 5667                       Fury
+        # 2412             American Movie
         
-        1582    The Godfather: Part III
-        4221                    8 Women
-        2159              Summer of Sam
-        '''
-        print(self.get_recommendations_with_tfidf('Inception').head(10)) # 인셉션
-        '''
-        5239                              Cypher
-        141                                Crumb
-        6398                         Renaissance
-        653                            Lone Star
-        1703                               House
-        4739                    The Pink Panther
-        319                                 Cobb
-        2828    What Ever Happened to Baby Jane?
-        8867                     Pitch Perfect 2
-        979          Once Upon a Time in America
-        '''
-        # TEST 줄거리(tfidf) 기반 추천
+        # 1582    The Godfather: Part III
+        # 4221                    8 Women
+        # 2159              Summer of Sam
+        # '''
+        # print(self.get_recommendations_with_tfidf('Inception').head(10)) # 인셉션
+        # '''
+        # 5239                              Cypher
+        # 141                                Crumb
+        # 6398                         Renaissance
+        # 653                            Lone Star
+        # 1703                               House
+        # 4739                    The Pink Panther
+        # 319                                 Cobb
+        # 2828    What Ever Happened to Baby Jane?
+        # 8867                     Pitch Perfect 2
+        # 979          Once Upon a Time in America
+        # '''
+        # # TEST 줄거리(tfidf) 기반 추천
 
         cv_matrix = self.create_count_vectorizer_matrix()
         # TEST 감독(가중치*3), 배우(가중치*1), 키워드(가중치*1) (CountVectorizer)기반 추천
-        print(self.get_recommendations_with_count_vectorizer('The Godfather').head(10)) # 대부1
-        '''
-        994            The Godfather: Part II
-        3300                 Gardens of Stone
-        3616    Tucker: The Man and His Dream
-        1346                    The Rainmaker
-        1602          The Godfather: Part III
-        3705                  The Cotton Club
-        4518               One from the Heart
-        981                    Apocalypse Now
-        2998                 The Conversation
-        5867                      Rumble Fish
-        '''
-        print(self.get_recommendations_with_count_vectorizer('Inception').head(10)) # 인셉션
-        '''
-        6623                             The Prestige
-        3381                                  Memento
-        4145                                 Insomnia
-        2085                                Following
-        8031                    The Dark Knight Rises
-        8613                             Interstellar
-        6981                          The Dark Knight
-        6218                            Batman Begins
-        8207                                   Looper
-        5638    Sky Captain and the World of Tomorrow
-        '''
-        # TEST 감독(가중치*3), 배우(가중치*1), 키워드(가중치*1) (CountVectorizer)기반 추천
-        print('구분구분구분')
+        # print(self.get_recommendations_with_count_vectorizer('The Godfather').head(10)) # 대부1
+        # '''
+        # 994            The Godfather: Part II
+        # 3300                 Gardens of Stone
+        # 3616    Tucker: The Man and His Dream
+        # 1346                    The Rainmaker
+        # 1602          The Godfather: Part III
+        # 3705                  The Cotton Club
+        # 4518               One from the Heart
+        # 981                    Apocalypse Now
+        # 2998                 The Conversation
+        # 5867                      Rumble Fish
+        # '''
+        # print(self.get_recommendations_with_count_vectorizer('Inception').head(10)) # 인셉션
+        # '''
+        # 6623                             The Prestige
+        # 3381                                  Memento
+        # 4145                                 Insomnia
+        # 2085                                Following
+        # 8031                    The Dark Knight Rises
+        # 8613                             Interstellar
+        # 6981                          The Dark Knight
+        # 6218                            Batman Begins
+        # 8207                                   Looper
+        # 5638    Sky Captain and the World of Tomorrow
+        # '''
+        # # TEST 감독(가중치*3), 배우(가중치*1), 키워드(가중치*1) (CountVectorizer)기반 추천
+        # print('구분구분구분')
 
 
         # print(ai.hybrid(1, 'Avatar'))
@@ -114,6 +114,7 @@ class MovieAi:
 
         # title = input('제목 입력 : ')
         # user = input('유저 입력 : ')
+        print('##### 추천 영화 목록 #####')
         hybrid_recommendation = self.hybrid(1, title)
         return hybrid_recommendation
         print('***** END *****')
@@ -169,56 +170,56 @@ class MovieAi:
 
         return md
 
-    def create_qualified(self):
-        '''
-        adult                     : null count =      0 -> drop
-        belongs_to_collection     : null count =  40972 -> drop
-        budget                    : null count =      0 -> drop
-        genres                    : null count =      0
-        homepage                  : null count =  37684 -> drop
-        id                        : null count =      0 -> drop
-        imdb_id                   : null count =     17 -> drop
-        original_language         : null count =     11 -> drop
-        original_title            : null count =      0 -> drop
-        overview                  : null count =    954 -> drop
-        popularity                : null count =      5
-        poster_path               : null count =    386 -> drop
-        production_companies      : null count =      3 -> drop
-        production_countries      : null count =      3 -> drop
-        release_date              : null count =     87 -> drop
-        revenue                   : null count =      6 -> drop
-        runtime                   : null count =    263 -> drop
-        spoken_languages          : null count =      6 -> drop
-        status                    : null count =     87 -> drop
-        tagline                   : null count =  25054 -> drop
-        title                     : null count =      6
-        video                     : null count =      6 -> drop
-        vote_average              : null count =      6
-        vote_count                : null count =      6
-        year                      : null count =      0
-        '''
-        md = self.md
-        min_vote = self.min_vote
+    # def create_qualified(self):
+    #     '''
+    #     adult                     : null count =      0 -> drop
+    #     belongs_to_collection     : null count =  40972 -> drop
+    #     budget                    : null count =      0 -> drop
+    #     genres                    : null count =      0
+    #     homepage                  : null count =  37684 -> drop
+    #     id                        : null count =      0 -> drop
+    #     imdb_id                   : null count =     17 -> drop
+    #     original_language         : null count =     11 -> drop
+    #     original_title            : null count =      0 -> drop
+    #     overview                  : null count =    954 -> drop
+    #     popularity                : null count =      5
+    #     poster_path               : null count =    386 -> drop
+    #     production_companies      : null count =      3 -> drop
+    #     production_countries      : null count =      3 -> drop
+    #     release_date              : null count =     87 -> drop
+    #     revenue                   : null count =      6 -> drop
+    #     runtime                   : null count =    263 -> drop
+    #     spoken_languages          : null count =      6 -> drop
+    #     status                    : null count =     87 -> drop
+    #     tagline                   : null count =  25054 -> drop
+    #     title                     : null count =      6
+    #     video                     : null count =      6 -> drop
+    #     vote_average              : null count =      6
+    #     vote_count                : null count =      6
+    #     year                      : null count =      0
+    #     '''
+    #     md = self.md
+    #     min_vote = self.min_vote
 
-        qualified = md[(md['vote_count'] >= min_vote) & (md['vote_count'].notnull()) & (md['vote_average'].notnull())][['title', 'year', 'vote_count', 'vote_average', 'popularity', 'genres']]
-        qualified['vote_count'] = qualified['vote_count'].astype('int')
-        qualified['vote_average'] = qualified['vote_average'].astype('int')
-        self.qualified = qualified
+    #     qualified = md[(md['vote_count'] >= min_vote) & (md['vote_count'].notnull()) & (md['vote_average'].notnull())][['title', 'year', 'vote_count', 'vote_average', 'popularity', 'genres']]
+    #     qualified['vote_count'] = qualified['vote_count'].astype('int')
+    #     qualified['vote_average'] = qualified['vote_average'].astype('int')
+    #     self.qualified = qualified
 
 
-        print(qualified)
+    #     print(qualified)
 
-        '''
-        ['title', 'year', 'vote_count', 'vote_average', 'popularity', 'genres']
-        title                     : null count =      0
-        year                      : null count =      0
-        vote_count                : null count =      0
-        vote_average              : null count =      0
-        popularity                : null count =      0
-        genres                    : null count =      0
-        '''
+    #     '''
+    #     ['title', 'year', 'vote_count', 'vote_average', 'popularity', 'genres']
+    #     title                     : null count =      0
+    #     year                      : null count =      0
+    #     vote_count                : null count =      0
+    #     vote_average              : null count =      0
+    #     popularity                : null count =      0
+    #     genres                    : null count =      0
+    #     '''
 
-        return qualified
+    #     return qualified
 
     def weighted_rating(self, x):
         min_vote = self.min_vote
@@ -228,15 +229,14 @@ class MovieAi:
         R = x['vote_average']
         return (v/(v+min_vote) * R) + (min_vote/(min_vote+v) * movie_ave)
 
-    def emb_proc(self):
-        md = self.md
-        emb = md.apply(lambda x: pd.Series(x['genres']), axis=1).stack().reset_index(level=1, drop=True)
-        emb.name = 'genre'
-        print(emb.head(10))
+    # def emb_proc(self):
+    #     md = self.md
+    #     emb = md.apply(lambda x: pd.Series(x['genres']), axis=1).stack().reset_index(level=1, drop=True)
+    #     emb.name = 'genre'
+    #     print(emb.head(10))
 
-        gen_md = md.drop('genres', axis=1).join(emb)
-        print(gen_md.head(10))
-
+    #     gen_md = md.drop('genres', axis=1).join(emb)
+    #     print(gen_md.head(10))
 
     def create_smd(self):
         md = self.md
@@ -258,46 +258,37 @@ class MovieAi:
         self.links_small = links_small
         self.smd = smd
 
-        return smd
+    # def creat_tfidf_matrix(self):
+    #     smd = self.smd
+    #     indices = self.indices
+    #     cosine_sim = self.cosine_sim
+    #     titles = self.titles
 
-    def creat_tfidf_matrix(self):
-        smd = self.smd
-        indices = self.indices
-        cosine_sim = self.cosine_sim
-        titles = self.titles
+    #     tf_idf = TfidfVectorizer(analyzer='word', ngram_range=(1, 2), min_df=0, stop_words='english')
+    #     tfidf_matrix = tf_idf.fit_transform(smd['description'])
+    #     tfidf_matrix.shape
+    #     cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
+    #     cosine_sim[0]
+    #     print(cosine_sim[0])
+    #     smd = smd.reset_index()
+    #     titles = smd['title']
+    #     indices = pd.Series(smd.index, index=smd['title'])
 
-        tf_idf = TfidfVectorizer(analyzer='word', ngram_range=(1, 2), min_df=0, stop_words='english')
-        tfidf_matrix = tf_idf.fit_transform(smd['description'])
-        tfidf_matrix.shape
-        cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-        cosine_sim[0]
-        print(cosine_sim[0])
-        smd = smd.reset_index()
-        titles = smd['title']
-        indices = pd.Series(smd.index, index=smd['title'])
+    #     self.indices = indices
+    #     self.cosine_sim = cosine_sim
+    #     self.titles = titles
 
-        self.indices = indices
-        self.cosine_sim = cosine_sim
-        self.titles = titles
+    # def get_recommendations_with_tfidf(self, title):
+    #     indices = self.indices
+    #     cosine_sim = self.cosine_sim
+    #     titles = self.titles
 
-
-    def create_similarity_degree(self):
-        pass
-
-    def get_recommendations_with_tfidf(self):
-        pass
-
-    def get_recommendations_with_tfidf(self, title):
-        indices = self.indices
-        cosine_sim = self.cosine_sim
-        titles = self.titles
-
-        idx = indices[title]
-        sim_scores = list(enumerate(cosine_sim[idx]))
-        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-        sim_scores = sim_scores[1:31]
-        movie_indices = [i[0] for i in sim_scores]
-        return titles.iloc[movie_indices]
+    #     idx = indices[title]
+    #     sim_scores = list(enumerate(cosine_sim[idx]))
+    #     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    #     sim_scores = sim_scores[1:31]
+    #     movie_indices = [i[0] for i in sim_scores]
+    #     return titles.iloc[movie_indices]
 
     def create_count_vectorizer_matrix(self):
         smd = self.smd
@@ -389,17 +380,17 @@ class MovieAi:
         self.titles = titles        
         self.smd = smd
 
-    def get_recommendations_with_count_vectorizer(self, title):
-        indices = self.indices
-        cosine_sim = self.cosine_sim
-        titles = self.titles
+    # def get_recommendations_with_count_vectorizer(self, title):
+    #     indices = self.indices
+    #     cosine_sim = self.cosine_sim
+    #     titles = self.titles
 
-        idx = indices[title]
-        sim_scores = list(enumerate(cosine_sim[idx]))
-        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-        sim_scores = sim_scores[1:31]
-        movie_indices = [i[0] for i in sim_scores]
-        return titles.iloc[movie_indices]
+    #     idx = indices[title]
+    #     sim_scores = list(enumerate(cosine_sim[idx]))
+    #     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    #     sim_scores = sim_scores[1:31]
+    #     movie_indices = [i[0] for i in sim_scores]
+    #     return titles.iloc[movie_indices]
 
     @staticmethod
     def get_director(x):
@@ -445,11 +436,14 @@ class MovieAi:
         cosine_sim = self.cosine_sim
         smd = self.smd
 
+        print('**********')
+        print(smd)
         svd = self.craete_personal_value()
         
         path = os.path.abspath('')
         fname = '\com_dayoung_api\cop\mov\model\data\links_small.csv'
         id_map = pd.read_csv(path + fname, encoding='utf-8')[['movieId', 'tmdbId']]
+        
         id_map['tmdbId'] = id_map['tmdbId'].apply(self.convert_int)
         id_map.columns = ['movieId', 'id']
         id_map = id_map.merge(smd[['title', 'id']], on='id').set_index('title')
@@ -471,7 +465,7 @@ class MovieAi:
         return(movies.head(50))
 
 
-if __name__ == "__main__":
-    t = MovieAi()
-    t.hook()
+# if __name__ == "__main__":
+#     t = MovieAi()
+#     t.hook()
 
