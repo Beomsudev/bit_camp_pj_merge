@@ -19,15 +19,20 @@ class ReviewAi(object):
         self.okt = Okt()
         self.x_train = None
         self.y_train = None
-        self.fname =  '/Users/youngseonkim/Documents/project_merge/api_master/com_dayoung_api/cop/rev/model/data'
+        self.path =  os.path.abspath('')
+        self.fname =  str
         self.x_test = None
         self.y_test = None
 
     def create_docs(self):
-        with open(self.fname + '/train_docs.json') as f:
+        path = self.path
+        fname = self.fname
+        fname = '/com_dayoung_api/cop/rev/model/data/train_docs.json'
+        with open(path + fname, encoding='utf-8') as f:
             train_docs = json.load(f)
             
-        with open(self.fname + '/test_docs.json') as f:
+        fname = '/com_dayoung_api/cop/rev/model/data/test_docs.json'
+        with open(path + fname, encoding='utf-8') as f:
             test_docs = json.load(f)
         # print(train_docs[:10])
         return [train_docs, test_docs]
@@ -91,7 +96,11 @@ class ReviewAi(object):
         model.save('another_model.h5')
 
     def model_load(self):
-        loaded_model = load_model(self.fname + '/review_model.h5')
+        path = self.path
+        fname = self.fname
+
+        fname = '/com_dayoung_api/cop/rev/model/data/review_model.h5'
+        loaded_model = load_model(path + fname)
         return loaded_model
 
     def model_eval(self, model):
