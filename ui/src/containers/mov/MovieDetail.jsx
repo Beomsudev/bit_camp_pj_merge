@@ -36,15 +36,13 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     height: '100%',
-    // padding: '100px',
     display: 'flex',
     flexDirection: 'column',
   },
   cardMedia: {
     width: '100%',
     height: '50%',
-    paddingTop: '150%', // 16:9
-    // fontsize: ''
+    paddingTop: '150%'
   },
   cardContent: {
     flexGrow: 1,
@@ -64,7 +62,6 @@ export default function MovieDetail() {
   useEffect(() => {
       axios.get(`http://127.0.0.1:8080/api/movies`)
       .then(res=>{
-          // alert(`List Success`)
           setData(res.data.slice(0, 102))
       })
       .catch(e=>{
@@ -92,7 +89,7 @@ export default function MovieDetail() {
 
     const fetchSomeRecommendMovie = useCallback(async e=> {
       const title_naver_eng = e.target.getAttribute(`title_naver_eng`)
-      alert(`영화 추천 ${title_naver_eng}`)
+      alert(`추천 영화 분석 중 입니다. 잠시만 기다려 주세요!`)
       try {
           const req = {
               method: c.get,
@@ -109,34 +106,20 @@ export default function MovieDetail() {
   return (
     <React.Fragment>
       <CssBaseline />
-      {/* <AppBar position="relative">
-        <Toolbar>
-          <CameraIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-            Album layout
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
       <main>
-        {/* Hero unit */}
         <div>
-          <nav>
+          {/* <nav>
             <ol>
                 <li><Link to='/movie-register'>Movie Register</Link></li>
                 <li><Link to='/movie-list'>Movie List</Link></li>
                 <li><Link to='/movie-modify'>Movie Modify</Link></li>
                 <li><Link to='/movie-remove'>Movie Remove</Link></li>
             </ol>
-          </nav>
+          </nav> */}
           
           제목 검색 : <input type="text" id='Title'/> 
           <button type="button" class="btn btn-sm btn-primary" id="btnSearch" onClick={fetchSomeMovie}>Search</button>
-{/* 
-          영화 추천 : <input type="text" id='recoTitle'/> 
-          <button type="button" class="btn btn-sm btn-primary" id="btnRecommend" onClick={fetchSomeRecommendMovie}>Search</button> */}
-
         <Container className={classes.cardGrid}> 
-          {/* End hero unit */}
           <Grid container spacing={3}>
             {data.map((i, index) => (
               <Grid item key={index} xs={12} sm={6} md={2}>
@@ -155,9 +138,6 @@ export default function MovieDetail() {
                     <Typography>
                       {i.genres_kor}
                     </Typography>
-                    {/* <Typography>
-                      {i.keyword_kor}
-                    </Typography> */}
                     <Typography>
                       {i.running_time_kor}분
                     </Typography>

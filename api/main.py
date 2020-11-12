@@ -11,8 +11,6 @@ from com_dayoung_api.cop.act.model.actor_dao import ActorDao
 
 from com_dayoung_api.cop.mov.model.movie_dao import MovieDao
 
-from com_dayoung_api.cop.rat.model.rating_dao import RatingDao
-
 from com_dayoung_api.cop.rev.model.review_dao import ReviewDao
 
 '''
@@ -47,13 +45,11 @@ with app.app_context():
     count_user = UserDao.count()    
     count_actor = ActorDao.count()
     count_movie = MovieDao.count()
-    count_rating = RatingDao.count()    
     count_review = ReviewDao.count()
 
     print(f'USR TABLE COUNT : {count_user[0]:6}')
     print(f'ACT TABLE COUNT : {count_actor[0]:6}')
     print(f'MOV TABLE COUNT : {count_movie[0]:6}')
-    print(f'RAT TABLE COUNT : {count_rating[0]:6}')
     print(f'REV TABLE COUNT : {count_review[0]:6}')
     
     if count_user[0] == 0:
@@ -67,10 +63,6 @@ with app.app_context():
     if count_movie[0] == 0:
         print('***** MOV DATA INSERT *****')
         MovieDao.bulk()
-
-    if count_rating[0] == 0:
-        print('***** RAT DATA INSERT *****')
-        RatingDao.bulk()
 
     # if count_review[0] == 0:
     #     print('***** REV DATA INSERT *****')

@@ -14,10 +14,6 @@ from com_dayoung_api.cop.mov.resource.search import MovieSearch
 from com_dayoung_api.cop.mov.resource.movie_del import MovieDel
 from com_dayoung_api.cop.mov.resource.recommendation import MovieRecommendation
 
-from com_dayoung_api.cop.rat.resource.rating import Rating, Ratings
-from com_dayoung_api.cop.rat.resource.search import RatingSearch
-from com_dayoung_api.cop.rat.resource.rating_del import RatingDel
-
 from com_dayoung_api.cop.rev.resource.review import Review, Reviews
 from com_dayoung_api.cop.rev.resource.my_review import MyReview
 from com_dayoung_api.cop.rev.resource.score import ReviewScore
@@ -76,18 +72,6 @@ api = Api(movie_del)
 api = Api(movie_recommendation)
 ############################## MOVIE ##############################
 
-############################## RATING ##############################
-rating = Blueprint('rating', __name__, url_prefix='/api/rating')
-ratings = Blueprint('ratings', __name__, url_prefix='/api/ratings')
-rating_search = Blueprint('rating_search', __name__, url_prefix='/api/rating-search')
-rating_del = Blueprint('rating_del', __name__, url_prefix='/api/rating-del')
-
-api = Api(rating)
-api = Api(ratings)
-api = Api(rating_search)
-api = Api(rating_del)
-############################## RATING ##############################
-
 ############################## REVIEW ##############################
 review = Blueprint('review', __name__, url_prefix='/api/review')
 reviews = Blueprint('reviews', __name__, url_prefix='/api/reviews')
@@ -133,13 +117,6 @@ def initialize_routes(api):
     api.add_resource(MovieDel, '/api/movie-del')
     api.add_resource(MovieRecommendation, '/api/movie-recommendation/<string:title_naver_eng>')
 ############################## MOVIE ##############################
-
-############################## RATING ##############################
-    api.add_resource(Rating, '/api/rating')
-    api.add_resource(Ratings, '/api/ratings')
-    api.add_resource(RatingSearch, '/api/rating-search/<string:ratingid>')
-    api.add_resource(RatingDel, '/api/rating-del')
-############################## RATING ##############################
 
 ############################## REVIEW ##############################
     api.add_resource(Review, '/api/review', '/api/review/<string:id>')

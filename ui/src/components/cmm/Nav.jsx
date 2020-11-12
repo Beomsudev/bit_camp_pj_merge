@@ -102,7 +102,7 @@ export default function Nav(props) {
        {props.isAuth !== null
         ? <div>  
           <Button style ={{fontSize: 25}}>
-            <Link to="/" className={classes.dayoungTitle}>다영이</Link>
+            <Link to="/movie-detail" className={classes.dayoungTitle}>다영이</Link>
             </Button>
         {/* <Typography style={{ paddingLeft: 20 }}> */}
           <Button>
